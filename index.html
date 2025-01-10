@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrimonial Website</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+</head>
+<body>
+
+    <header>
+        <div class="info">
+            <span><i class="fa fa-phone"></i> 7366848251</span>
+            <span><i class="fa fa-envelope"> </i> Metrimonial@gmail.com</span>
+        </div>
+        <nav>
+            <div class="logo">
+                <i class="fa fa-gift"> </i>Magic Box
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Services</a>
+                <a href="#">Stats</a>
+                <a href="#">Testimonials</a>
+                <a href="#">Log In</a>
+            </div>
+        </nav>
+
+        <!-- Registration Form -->
+        <div class="box" id="register">
+            <h2>Register</h2>
+            <form id="registrationForm">
+                <input type="text" id="name" maxlength="20" placeholder="Full Name" required>
+                <input type="email" id="email" maxlength="20" placeholder="Email" required>
+                <input type="text" id="contact" maxlength="13" placeholder="+91 Contact Number" required>
+                <input type="text" id="interest" maxlength="20" placeholder="Your Interests" required>
+                <input type="password" id="password" maxlength="20" placeholder="Set password" required>
+                
+                <button id="mybutton1" type="submit">Register</button>
+            </form>
+        </div>
+
+        <div class="htext">
+            <h1>Matrimonial Search.</h1>
+            <h2>Best Matching<br><span>Couples<br/></span></h2>
+            <p>What greater thing is there for two human souls than to feel that they are joined for life to strengthen each other in all labor, to rest on each other in all sorrow, to minister to each other in all pain, to be one with each other in silent, unspeakable memories at the moment of the last parting. If you want something to last forever, you treat it differently. You shield it and protect it. You don’t make it common or ordinary.</p>
+            <br>
+            <a href="#">Read more</a>
+        </div>
+    </header>
+
+    <script>
+        function userregistration(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            var userData = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                contact: $("#contact").val(),
+                interest: $("#interest").val(),
+                password: $("#password").val()
+            };
+
+            $.ajax({
+                url: "http://localhost:8080/register",  // Update with correct URL if necessary
+                type: "POST",
+                data: JSON.stringify(userData),
+                contentType: "application/json",
+                success: function (data) {
+                    // Redirect to success page
+                    window.location.href = "/registration-success"; 
+                },
+                error: function (error) {
+                    alert("Error: " + error.responseText);
+                }
+            });
+        }
+
+        // Attach the userregistration function to the form submission event
+        $(document).ready(function(){
+            $("#registrationForm").submit(function(event) {
+                userregistration(event);
+            });
+        });
+    </script>
+
+</body>
+</html>
